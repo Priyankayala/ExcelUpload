@@ -13,14 +13,14 @@
     {
       "kind": "main",
       "tag": "com-fd-djaja-sap-sac-excel",
-      "url": "https://github.com/ferrygun/SACXLSXFileUpload/blob/master/CustomWidget/excel.js",
+      "url": "https://priyankayala.github.io/ExcelUpload/excel.js",
       "integrity": "",
       "ignoreIntegrity": true
     },
     {
       "kind": "styling",
       "tag": "com-fd-djaja-sap-sac-excel-aps",
-      "url": "https://github.com/ferrygun/SACXLSXFileUpload/blob/master/CustomWidget/aps_excel.js",
+      "url": "https://priyankayala.github.io/ExcelUpload/aps_excel.js",
       "integrity": "",
       "ignoreIntegrity": true
     }
