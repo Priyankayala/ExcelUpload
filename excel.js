@@ -303,8 +303,9 @@
                     onValidate: function (e) {
                         var fU = this.getView().byId("idfileUploader");
                         //var domRef = fU.getFocusDomRef();
-                        var domRef = this.getView().byId("__xmlview1--idfileUploader-fu").getFocusDomRef();
-                        var file = domRef.files[0];
+                        //var domRef = this.getView().byId("__xmlview1--idfileUploader-fu").getFocusDomRef();
+                        //var file = domRef.files[0];
+                        var file = $("#__xmlview1--idfileUploader-fu")[0].files[0];
                         var this_ = this;
 
                         this_.wasteTime();
