@@ -359,12 +359,12 @@
                                                     result_final.push({
                                                       'ID': rec[0].trim(),
                                                       'DESCRIPTION': rec[1].trim(),
-                                                      'PARENT': rec[2].trim(),
+                                                      'H1': rec[2].trim(),
                                                       'BASE_UOM': rec[3].trim(),
-                                                      'PRODUCT_GROUP': rec[4].trim(),
+                                                      'MFG_PLANT': rec[4].trim(),
                                                       'PRODUCT_TYPE': rec[5].trim(),
-                                                      'RAW_SOURCE': rec[6].trim(),
-													  'LEVEL': rec[7].trim(),
+                                                      'LAUNCH_DATE': rec[6].trim(),
+						       'NPD': rec[7].trim(),
                                                     });
                                                 }
                                             }
