@@ -361,8 +361,8 @@
                                                       'DESCRIPTION': rec[1].trim(),
                                                       'H1': rec[2].trim(),
                                                       'BASE_UOM': rec[3].trim(),
-                                                      'MFG_PLANT': rec[4].trim(),
-                                                      'PRODUCT_TYPE': rec[5].trim(),
+                                                      'PRODUCT_TYPE': rec[4].trim(),
+                                                      'MFG_PLANT': rec[5].trim(),
                                                       'LAUNCH_DATE': rec[6].trim(),
 						       'NPD': rec[7].trim(),
                                                     });
