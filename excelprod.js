@@ -346,7 +346,7 @@
                                 var rec_count = 0;
 
                                 var len = 0;
-                                if (lengthfield === 8) {
+                                if (lengthfield === 7) {
                                     for (var i = 1; i < result.split("[$@~!~@$]").length; i++) {
                                         if (result.split("[$@~!~@$]")[i].length > 0) {
 
@@ -359,18 +359,18 @@
                                                     result_final.push({
                                                       'ID': rec[0].trim(),
                                                       'DESCRIPTION': rec[1].trim(),
-                                                      'H1': rec[2].trim(),
-                                                      'BASE_UOM': rec[3].trim(),
-                                                      'PRODUCT_TYPE': rec[4].trim(),
-                                                      'MFG_PLANT': rec[5].trim(),
-                                                      'LAUNCH_DATE': rec[6].trim(),
-						       'NPD': rec[7].trim(),
+							'ASSET_TYPE': rec[2].trim(),
+                                                      'COMPANY_CODE': rec[3].trim(),
+                                                      'ASSET_CLASS': rec[4].trim(),
+                                                      'COST_CENTER': rec[5].trim(),
+                                                      'CWIP': rec[6].trim(),
+                                                     
                                                     });
                                                 }
                                             }
                                         }
                                     }
-                                 if (lengthfield === 7) {
+                                 else (lengthfield === 8) {
                                     for (var i = 1; i < result.split("[$@~!~@$]").length; i++) {
                                         if (result.split("[$@~!~@$]")[i].length > 0) {
 
@@ -383,11 +383,12 @@
                                                     result_final.push({
                                                       'ID': rec[0].trim(),
                                                       'DESCRIPTION': rec[1].trim(),
-                                                      'ASSET_TYPE': rec[2].trim(),
-                                                      'COMPANY_CODE': rec[3].trim(),
-                                                      'ASSET_CLASS': rec[4].trim(),
-                                                      'COST_CENTER': rec[5].trim(),
-                                                      'CWIP': rec[6].trim(),
+                                                       'H1': rec[2].trim(),
+                                                      'BASE_UOM': rec[3].trim(),
+                                                      'PRODUCT_TYPE': rec[4].trim(),
+                                                      'MFG_PLANT': rec[5].trim(),
+                                                      'LAUNCH_DATE': rec[6].trim(),
+						       'NPD': rec[7].trim(),
                                                     });
                                                 }
                                             }
