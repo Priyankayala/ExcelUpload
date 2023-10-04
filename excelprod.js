@@ -345,32 +345,35 @@
                                 var total = this_.getView().byId("total");
                                 var rec_count = 0;
 
+				 
+                                var headers = [];
+
                                 var len = 0;
-                                if (lengthfield === 9) {
-                                    for (var i = 1; i < result.split("[$@~!~@$]").length; i++) {
+                                if (lengthfield > 1) {
+                                    for (var i = 0; i < result.split("[$@~!~@$]").length; i++) {
                                         if (result.split("[$@~!~@$]")[i].length > 0) {
 
-                                            var rec = result.split("[$@~!~@$]")[i].split("[#@~!~@#]");
-                                            if (rec.length > 0) {
-                                                len = rec[0].trim().length + rec[1].trim().length + rec[2].trim().length + rec[3].trim().length + rec[4].trim().length + rec[
-                                                    5].trim().length + rec[6].trim().length + rec[7].trim().length + rec[8].trim().length;
-                                                if (len > 0) {
-                                                    rec_count = rec_count + 1;
-                                                    result_final.push({
-                                                      'ID': rec[0].trim(),
-                                                      'DESCRIPTION': rec[1].trim(),
-                                                      'PARENT': rec[2].trim(),
-						 	'PARENT2': rec[3].trim(),
-                                                      'BASE_UOM': rec[4].trim(),
-                                                      'PRODUCT_TYPE': rec[5].trim(),
-                                                      'MFG_PLANT': rec[6].trim(),
-                                                      'LAUNCH_DATE': rec[7].trim(),
-						      'NPD': rec[8].trim(),
-                                                    });
-                                                }
-                                            }
+                                        var cells = result.split("[$@~!~@$]")[i].split("[#@~!~@#]");
+                                                  var rowData = {};
+                                                  for(var j=0;j<cells.length;j++){
+                                                      if(i==0){
+                                                          var headerName = cells[j].trim();
+                                                          headers.push(headerName);
+                                                      }else{
+                                                          var key = headers[j];
+                                                          if(key){
+                                                              rowData[key] = cells[j].trim();
+                                                          }
+                                                      }
+                                                  }
+                                                  //skip the first row (header) data
+                                                  if(i!=0){
+                                                      result_final.push(rowData);
+                                                  }
+                                             
                                         }
                                     }
+                                 
 
                                     if (result_final.length === 0) {
                                         fU.setValue("");
