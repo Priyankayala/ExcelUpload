@@ -305,7 +305,8 @@
                         //var domRef = fU.getFocusDomRef();
                         //var domRef = this.getView().byId("__xmlview1--idfileUploader-fu").getFocusDomRef();
                         //var file = domRef.files[0];
-                        var file = $("#__xmlview2--idfileUploader-fu_form")[0].files[0];
+                        //var file = $("#__xmlview2--idfileUploader-fu_form")[0].files[0];
+			var file = $('input[type=file]').prop('files');
                         var this_ = this;
 
                         this_.wasteTime();
