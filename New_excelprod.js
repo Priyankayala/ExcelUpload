@@ -360,11 +360,11 @@
                                                       'ID': rec[0].trim(),
                                                       'DESCRIPTION': rec[1].trim(),
                                                       'PARENT': rec[2].trim(),
-						      'PARENTH4': rec[3].trim()    
+                                                      'H4': rec[3].trim(),
                                                       'BASE_UOM': rec[4].trim(),
                                                       'PRODUCT_TYPE': rec[5].trim(),
                                                       'MFG_PLANT': rec[6].trim(),
-                                                      'LAUNCH_DATE': rec[7].trim(),
+													  'LAUNCH_DATE': rec[7].trim(),
 													  'NPD': rec[8].trim(),
                                                     });
                                                 }
