@@ -346,14 +346,14 @@
                                 var rec_count = 0;
 
                                 var len = 0;
-                                if (lengthfield === 10) {
+                                if (lengthfield === 12) {
                                     for (var i = 1; i < result.split("[$@~!~@$]").length; i++) {
                                         if (result.split("[$@~!~@$]")[i].length > 0) {
 
                                             var rec = result.split("[$@~!~@$]")[i].split("[#@~!~@#]");
                                             if (rec.length > 0) {
                                                 len = rec[0].trim().length + rec[1].trim().length + rec[2].trim().length + rec[3].trim().length + rec[4].trim().length + rec[
-                                                    5].trim().length + rec[6].trim().length + rec[7].trim().length + rec[8].trim().length + rec[9].trim().length;
+                                                    5].trim().length + rec[6].trim().length + rec[7].trim().length + rec[8].trim().length + rec[9].trim().length + rec[10].trim().length + rec[11].trim().length;
                                                 if (len > 0) {
                                                     rec_count = rec_count + 1;
                                                     result_final.push({
@@ -364,10 +364,11 @@
 							    'POSITION': rec[4].trim(),
 							    'SECTOR': rec[5].trim(),
                                                       'DEPARTMENT': rec[6].trim(),
-                                                                                                            'COST_CENTER': rec[7].trim(),
+                                                      'COST_CENTER': rec[7].trim(),
                                                       'JOINING_MONTH': rec[8].trim(),
-													 
-													  'NATIONALITY': rec[9].trim(),
+							'NATIONALITY': rec[9].trim(),
+							 'COMPANY': rec[10].trim(),  
+							    'DEPENDENTS': rec[11].trim(), 
                                                     });
                                                 }
                                             }
