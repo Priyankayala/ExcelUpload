@@ -346,14 +346,14 @@
                                 var rec_count = 0;
 
                                 var len = 0;
-                                if (lengthfield === 12) {
+                                if (lengthfield === 17) {
                                     for (var i = 1; i < result.split("[$@~!~@$]").length; i++) {
                                         if (result.split("[$@~!~@$]")[i].length > 0) {
 
                                             var rec = result.split("[$@~!~@$]")[i].split("[#@~!~@#]");
                                             if (rec.length > 0) {
                                                 len = rec[0].trim().length + rec[1].trim().length + rec[2].trim().length + rec[3].trim().length + rec[4].trim().length + rec[
-                                                    5].trim().length + rec[6].trim().length + rec[7].trim().length + rec[8].trim().length + rec[9].trim().length + rec[10].trim().length + rec[11].trim().length;
+                                                    5].trim().length + rec[6].trim().length + rec[7].trim().length + rec[8].trim().length + rec[9].trim().length + rec[10].trim().length + rec[11].trim().length + rec[12].trim().length + rec[13].trim().length + rec[14].trim().length + rec[15].trim().length + rec[16].trim().length;
                                                 if (len > 0) {
                                                     rec_count = rec_count + 1;
                                                     result_final.push({
@@ -369,6 +369,11 @@
 							'NATIONALITY': rec[9].trim(),
 							 'COMPANY': rec[10].trim(),  
 							    'SALES_COMMISSION': rec[11].trim(), 
+							    'HRA': rec[12].trim(),
+							    'TRANSPORT': rec[13].trim(),
+							    'FOOD': rec[14].trim(),
+							   'MOBILE': rec[15].trim(), 
+							    'SCHOOL': rec[16].trim(),
                                                     });
                                                 }
                                             }
