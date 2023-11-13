@@ -368,7 +368,7 @@
                                                       'JOINING_MONTH': rec[8].trim(),
 							'NATIONALITY': rec[9].trim(),
 							 'COMPANY': rec[10].trim(),  
-							    'COMMISSION': rec[11].trim(), 
+							    'SALES_COMMISSION': rec[11].trim(), 
                                                     });
                                                 }
                                             }
