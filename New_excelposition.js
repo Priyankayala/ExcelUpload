@@ -361,7 +361,7 @@
                                                       'DESCRIPTION': rec[1].trim(),
                                                       'PARENT': rec[2].trim(),
 							'PAY_GRADE': rec[3].trim(),
-							    'POSITION': rec[4].trim(),
+							    'JOB_CODE': rec[4].trim(),
 							    'SECTOR': rec[5].trim(),
                                                       'DEPARTMENT': rec[6].trim(),
                                                       'COST_CENTER': rec[7].trim(),
