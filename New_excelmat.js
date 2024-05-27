@@ -353,19 +353,19 @@
                                             var rec = result.split("[$@~!~@$]")[i].split("[#@~!~@#]");
                                             if (rec.length > 0) {
                                                 len = rec[0].trim().length + rec[1].trim().length + rec[2].trim().length + rec[3].trim().length + rec[4].trim().length + rec[
-                                                    5].trim().length + rec[6].trim().length + rec[7].trim().length + rec[8].trim().length;
+                                                    5].trim().length + rec[6].trim().length;
                                                 if (len > 0) {
                                                     rec_count = rec_count + 1;
                                                     result_final.push({
                                                       'ID': rec[0].trim(),
                                                       'DESCRIPTION': rec[1].trim(),
-                                                      'PARENT': rec[2].trim(),
-                                                      'H4': rec[3].trim(),
-                                                      'BASE_UOM': rec[4].trim(),
-                                                      'PRODUCT_TYPE': rec[5].trim(),
-                                                      'MFG_PLANT': rec[6].trim(),
-													  'LAUNCH_DATE': rec[7].trim(),
-													  'NPD': rec[8].trim(),
+                                                      'H1': rec[2].trim(),
+                                                      'RAW_MATERIALS': rec[3].trim(),
+						      'PRODUCTTYPE': rec[4].trim(),
+                                                      'BASE_UOM': rec[5].trim(),
+                                                      'ROW_SOURCE': rec[6].trim(),
+                                                      
+													  
                                                     });
                                                 }
                                             }
