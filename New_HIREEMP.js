@@ -300,169 +300,78 @@
                         }
                     },
 
-                    onValidate: function (e) {
-                        var fU = this.getView().byId("idfileUploader");
-                        //var domRef = fU.getFocusDomRef();
-                        //var domRef = this.getView().byId("__xmlview1--idfileUploader-fu").getFocusDomRef();
-                        //var file = domRef.files[0];
-                        var file = $("#__xmlview1--idfileUploader-fu")[0].files[0];
-                        var this_ = this;
-
-                        this_.wasteTime();
-
-                        var oModel = new JSONModel();
-                        oModel.setData({
-                            result_final: null
+                   onValidate: function (e) {
+    var fU = this.getView().byId("idfileUploader");
+    var domRef = fU.getFocusDomRef();
+    var file = domRef ? domRef.files[0] : null;
+    var this_ = this;
+ 
+    if (!file) {
+        MessageToast.show("Please select a file to upload.");
+        return;
+    }
+ 
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        try {
+            var workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+            var correctsheet = workbook.SheetNames.includes("Sheet1");
+ 
+            if (!correctsheet) {
+                MessageToast.show("Please upload the correct file.");
+                return;
+            }
+ 
+            var csv = XLSX.utils.sheet_to_csv(workbook.Sheets["Sheet1"]);
+            var result = csv.split("\n");
+            var result_final = [];
+ 
+            if (result.length < 2) {
+                MessageToast.show("No records found in the file.");
+                return;
+            }
+ 
+            result.forEach((row, index) => {
+                if (index > 0 && row.trim()) {
+                    var columns = row.split(",");
+                    if (columns.length === 14) {
+                        result_final.push({
+                            ID: columns[0].trim(),
+                            DESCRIPTION: columns[1].trim(),
+                            Role: columns[2].trim(),
+                            Job_Title: columns[3].trim(),
+                            Pension: columns[4].trim(),
+                            Soc_Sec_Band: columns[5].trim(),
+                            Contract_Type: columns[6].trim(),
+                            Band: columns[7].trim(),
+                            Country: columns[8].trim(),
+                            Manager_Name: columns[9].trim(),
+                            Start_Date: columns[10].trim(),
+                            First_Name: columns[11].trim(),
+                            Surname: columns[12].trim(),
+                            Gender: columns[13].trim(),
                         });
-
-                        var reader = new FileReader();
-                        reader.onload = async function (e) {
-                            var strCSV = e.target.result;
-
-                            var workbook = XLSX.read(strCSV, {
-                                type: 'binary'
-                            });
-
-                            var result_final = [];
-                            var result = [];
-                            var correctsheet = false;
-
-                            workbook.SheetNames.forEach(function (sheetName) {
-                                if (sheetName === "Sheet1") {
-                                    correctsheet = true;
-                                    var csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
-                                    if (csv.length) {
-                                        result.push(csv);
-                                    }
-                                    result = result.join("[$@~!~@$]")
-                                }
-                            });
-
-                            if (correctsheet) {
-                                var lengthfield = result.split("[$@~!~@$]")[0].split("[#@~!~@#]").length;
-                                console.log("lengthfield: " + lengthfield);
-
-                                var total = this_.getView().byId("total");
-                                var rec_count = 0;
-
-                                var len = 0;
-                                if (lengthfield === 14) {
-                                    for (var i = 1; i < result.split("[$@~!~@$]").length; i++) {
-                                        if (result.split("[$@~!~@$]")[i].length > 0) {
-
-                                            var rec = result.split("[$@~!~@$]")[i].split("[#@~!~@#]");
-                                            if (rec.length > 0) {
-                                                len = rec[0].trim().length + rec[1].trim().length + rec[2].trim().length + rec[3].trim().length + rec[4].trim().length + rec[
-                                                    5].trim().length + rec[6].trim().length + rec[7].trim().length + rec[8].trim().length + rec[9].trim().length + rec[10].trim().length + rec[11].trim().length + rec[12].trim().length + rec[13].trim().length ;
-                                                if (len > 0) {
-                                                    rec_count = rec_count + 1;
-                                                    result_final.push({
-                                                      'ID': rec[0].trim(),
-                                                      'DESCRIPTION': rec[1].trim(),
-                                                      'Role': rec[2].trim(),
-							'Job_Title': rec[3].trim(),
-							    'Pension': rec[4].trim(),
-							    'Soc_Sec_Band': rec[5].trim(),
-                                                      'Contract_Type': rec[6].trim(),
-                                                      'Band': rec[7].trim(),							    
-							'Country': rec[8].trim(),
-							 'Manager_Name': rec[9].trim(),  
-							 'Start_Date' : rec[10].trim(),
-							'First_Name' : rec[11].trim(),
-							'Surname' : rec[12].trim(),
-							'Gender' : rec[13].trim(),
-							  
-                                                    });
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    if (result_final.length === 0) {
-                                        fU.setValue("");
-                                        MessageToast.show("There is no record to be uploaded");
-                                        this_.runNext();
-                                    } else if (result_final.length >= 2001) {
-                                        fU.setValue("");
-                                        MessageToast.show("Maximum records are 2000.");
-                                        this_.runNext();
-                                    } else {
-                                        // Bind the data to the Table
-                                        oModel = new JSONModel();
-                                        oModel.setSizeLimit("5000");
-                                        oModel.setData({
-                                            result_final: result_final
-                                        });
-
-                                        var oModel1 = new sap.ui.model.json.JSONModel();
-                                        oModel1.setData({
-                                            fname: file.name,
-                                        });
-                                        console.log(oModel);
-
-                                        // var oHeaders =  {
-                                        //     "Authorization": "Basic XXXXXXXX",
-                                        //     "Content-Type": "application/x-www-form-urlencoded"
-                                        // }
-
-                                        _result = JSON.stringify(result_final);
-
-                                        that._firePropertiesChanged();
-                                            this.settings = {};
-                                            this.settings.result = "";
-
-                                            that.dispatchEvent(new CustomEvent("onStart", {
-                                                detail: {
-                                                    settings: this.settings
-                                                }
-                                            }));
-
-                                            this_.runNext();
-
-                                        //var oModel = new JSONModel();
-
-                                        //console.log(result_final);
-                                        //oModel.loadData("processData.xsjs", JSON.stringify(result_final), true, 'POST', false, true, oHeaders);
-
-                                        // oModel.attachRequestCompleted(function() {
-                                        //     var result = oModel.getData();
-                                        //     console.log(result);
-
-                                        //     _result = result;
-
-                                        //     that._firePropertiesChanged();
-                                        //     this.settings = {};
-                                        //     this.settings.result = "";
-
-                                        //     that.dispatchEvent(new CustomEvent("onStart", {
-                                        //         detail: {
-                                        //             settings: this.settings
-                                        //         }
-                                        //     }));
-
-                                        //     this_.runNext();
-
-                                        // });
-
-
-                                        fU.setValue("");
-                                    }
-                                } else {
-                                    this_.runNext();
-                                    fU.setValue("");
-                                    MessageToast.show("Please upload the correct file");
-                                }
-                            } else {
-                                this_.runNext();
-                                console.log("Error: wrong Excel File template");
-                                MessageToast.show("Please upload the correct file");
-                            }
-                        };
-
-                        if (typeof file !== 'undefined') {
-                            reader.readAsBinaryString(file);
-                        }
-                    },
+                    }
+                }
+            });
+ 
+            if (result_final.length === 0) {
+                MessageToast.show("No valid records found.");
+            } else if (result_final.length > 2000) {
+                MessageToast.show("Maximum records limit exceeded (2000).");
+            } else {
+                var oModel = new JSONModel({ result_final: result_final });
+                this_.getView().setModel(oModel, "resultModel");
+                MessageToast.show("File processed successfully.");
+            }
+        } catch (error) {
+            console.error("Error processing file:", error);
+            MessageToast.show("Error processing the file. Please try again.");
+        }
+    };
+ 
+    reader.readAsArrayBuffer(file);
+},
 
                     wasteTime: function() {
                         busyDialog.open();
